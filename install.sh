@@ -3,12 +3,12 @@
 HOSTNAME="$1"
 TOPICNAME="$2"
 
-if ! $HOSTNAME; then
+if [ -z "$HOSTNAME" ]; then
     echo "Missing hostname!"
     exit 1
 fi
 
-if ! $HOSTNAME; then
+if [ -z "$TOPICNAME" ]; then
     echo "Missing topic name!"
     exit 1
 fi
