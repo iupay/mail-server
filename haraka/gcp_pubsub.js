@@ -4,7 +4,7 @@ let topic;
 
 exports.register = function() {
     const client = new PubSub();
-    topic = client.topic('test-email');
+    topic = client.topic('<TOPICNAME>');
     this.register_hook('queue', 'send');
 };
 

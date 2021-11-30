@@ -1,9 +1,15 @@
 #!/usr/bin/sh
 
 HOSTNAME="$1"
+TOPICNAME="$2"
 
 if ! $HOSTNAME; then
     echo "Missing hostname!"
+    exit 1
+fi
+
+if ! $HOSTNAME; then
+    echo "Missing topic name!"
     exit 1
 fi
 
@@ -33,9 +39,11 @@ if ! command -v haraka &> /dev/null; then
     haraka -i /haraka
     haraka -c /haraka -p gcp_pubsub
 
+    sed -i "s/<TOPICNAME>/$TOPICNAME/g" ./haraka/gcp_pubsub.js
     mv ./haraka/gcp_pubsub.js /haraka/plugins/
     mv ./haraka/plugins /haraka/config/
     echo $HOSTNAME >> /haraka/config/host_list
+
 fi
 
 if [ ! -f "/etc/systemd/system/haraka.service" ]; then
