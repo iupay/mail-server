@@ -37,6 +37,10 @@ if ! [ -x "$(command -v haraka)" ]; then
     apt-get install -y python3
     yarn global add Haraka @google-cloud/pubsub
 
+    if [ -d /haraka ]; then
+        rm -r /haraka
+    fi
+
     haraka -i /haraka
     haraka -c /haraka -p gcp_pubsub
 
@@ -44,7 +48,6 @@ if ! [ -x "$(command -v haraka)" ]; then
     mv ./haraka/gcp_pubsub.js /haraka/plugins/
     mv ./haraka/plugins /haraka/config/
     echo $HOSTNAME >> /haraka/config/host_list
-
 fi
 
 if [ ! -f "/etc/systemd/system/haraka.service" ]; then
